@@ -58,7 +58,6 @@ def web_search(search_query):
     }
 
 def summarize_sources(web_research_results, research_topic, running_summary=None):
-    # current_results = web_research_results[-1]
     current_results = "\n".join(web_research_results) 
     if running_summary:
         message = (
@@ -97,10 +96,10 @@ async def main(message: cl.Message):
     while True:
         results = web_search(query)
 
-        titles = "\n".join(results["sources_gathered"][0])
+        titles = "\n".join(results["sources_gathered"])
 
         await cl.Message(
-            content=f"Fonti trovate: {titles}"
+            content=f"Fonti trovate:\n{titles}"
         ).send()
 
         summary = summarize_sources(results["web_research_results"], query, running_summary)
@@ -110,7 +109,7 @@ async def main(message: cl.Message):
             content=f"Riassunto attuale: {summary}"
         ).send()
 
-        max_cycles -= 3
+        max_cycles -= 1
         if max_cycles <= 0:
             break
 
