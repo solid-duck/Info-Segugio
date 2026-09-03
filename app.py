@@ -40,7 +40,7 @@ def format_content(result):
 
 def web_search(search_query):
     tavily_api_key = "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"
-    max_results = 10
+    max_results = 3
     include_raw = False
 
     tavily_client = TavilyClient(api_key=tavily_api_key)
@@ -110,7 +110,7 @@ async def main(message: cl.Message):
             content=f"Riassunto attuale: {summary}"
         ).send()
 
-        max_cycles -= 1
+        max_cycles -= 3
         if max_cycles <= 0:
             break
 
